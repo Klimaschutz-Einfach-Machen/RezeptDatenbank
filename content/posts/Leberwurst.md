@@ -1,15 +1,10 @@
 ---
 title: "Vegane Leberwurst"
 summary: "Aus Kidney-Bohnen mit Räuchertofu"
-author: "Nils Bokermann"
 date: 2025-03-27T13:03:51+01:00
-draft: false
-showToc: false
-comments: false
-description: "Vegane Leberwurst aus Kidney-Bohnen"
-showReadingTime: false
 tags: ["Vegan", "Frühling", "Sommer", "Herbst", "Winter"]
-weight: 1
+author: "Nils Bokermann"
+draft: false
 ---
 ## Zutaten
 - 120 g Kidneybohnen (getrocknet)
