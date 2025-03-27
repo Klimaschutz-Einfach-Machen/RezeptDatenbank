@@ -1,0 +1,40 @@
+baseURL: http://example.org/
+languageCode: de-de
+title: Klimafreundliche Rezepte
+
+theme: ["PaperMod"]
+
+mainsections: ["posts"]
+
+params:
+  defaultTheme: light
+  ShowShareButtons: true
+  ShareButtons: ["facebook", "twitter", "whatsapp"]
+  DateFormat: "_2.01.2006"
+  homeInfoParams:
+    Title: "Klimafreundliche Rezepte"
+    Content: >
+      👋 Willkommen bei der Sammlung klimafreundlicher Rezepte des Klimaschutzprojekts "Klimaschutz einfach machen" aus Bielefeld
+      
+      - 
+      
+      - Feel free to show your support by giving us a star 🌟 on GitHub and sharing with your friends and social media .
+      
+      - PaperMod is based on theme [Paper](https://github.com/nanxiaobei/hugo-paper/tree/4330c8b12aa48bfdecbcad6ad66145f679a430b3).
+
+menu:
+  main:
+    - identifier: search
+      name: Suche
+      url: /search/
+      weight: 10
+    - identifier: tags
+      name: Tags
+      url: /tags/
+      weight: 20
+
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON 
