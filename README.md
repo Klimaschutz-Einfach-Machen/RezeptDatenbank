@@ -9,7 +9,7 @@ Rezeptdatenbank des Projekts "Klimaschutz einfach machen" aus Bielefeld.
 ## Requirements
 
 - hugo (0.145+) [hugo-website](https://gohugo.ip)
-- Markdown-Edito
+- Markdown-Editor
 
 ## Lokaler Test
 Hugo-Server lokal starten: 
