@@ -5,6 +5,8 @@ theme: ["PaperMod"]
 
 mainsections: ["posts"]
 
+Copyright: © by "Klimaschutz einfach machen"
+
 params:
   defaultTheme: light
   ShowShareButtons: true
@@ -13,11 +15,13 @@ params:
   homeInfoParams:
     Title: "Klimafreundliche Rezepte"
     Content: >
-      👋 Willkommen bei der Sammlung klimafreundlicher Rezepte des Klimaschutzprojekts "Klimaschutz einfach machen" aus Bielefeld
+      👋 Willkommen bei der Sammlung klimafreundlicher Rezepte des Klimaschutzprojekts "Klimaschutz einfach machen" aus Bielefeld.
       
-      - Mitarbeit ist gerne gesehen
+      - Mitarbeit ist gerne gesehen.
       
-      - Sources bei [github](https://github.com/Klimaschutz-Einfach-Machen/RezeptDatenbank)
+      - Sources bei [github](https://github.com/Klimaschutz-Einfach-Machen/RezeptDatenbank).
+      
+      - Jeglicher Inhalt wird unter der [Creative Commons Lizenz](/Creative-Commons-License) veröffentlicht.
 
 menu:
   main:
