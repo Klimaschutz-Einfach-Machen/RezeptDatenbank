@@ -7,3 +7,7 @@ author: "Nils Bokermann"
 draft: true
 description: "Beschreibung"
 ---
+## Zutaten
+- Salz und Pfeffer
+
+## Zubereitung
