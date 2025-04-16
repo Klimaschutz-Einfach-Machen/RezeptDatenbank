@@ -1,41 +1,21 @@
 languageCode: de-de
 title: Klimafreundliche Rezepte
 
-theme: ["PaperMod"]
+#theme: ["hugo-tailwind-cookbook"]
 
-mainsections: ["posts"]
+Copyright: © by "Klimaschutz einfach machen" under the [Creative Commons License](/Creative-Commons-License/)
 
-Copyright: © by "Klimaschutz einfach machen"
+module:
+  imports:
+  - path: github.com/sanddorn/hugo-tailwind-cookbook
+
+defaultContentLanguage: de
 
 params:
-  defaultTheme: light
-  ShowShareButtons: true
-  ShareButtons: ["facebook", "twitter", "whatsapp"]
+  Logo: '/images/Logo.png'
+  DisplayRssButton: true
+  UseCardView: true
   DateFormat: "_2.01.2006"
-  homeInfoParams:
-    Title: "Klimafreundliche Rezepte"
-    Content: >
-      👋 Willkommen bei der Sammlung klimafreundlicher Rezepte des Klimaschutzprojekts "Klimaschutz einfach machen" aus Bielefeld.
-      
-      - Mitarbeit ist gerne gesehen.
-      
-      - Sources bei [github](https://github.com/Klimaschutz-Einfach-Machen/RezeptDatenbank).
-      
-      - Jeglicher Inhalt wird unter der [Creative Commons Lizenz](/Creative-Commons-License) veröffentlicht.
-
-menu:
-  main:
-    - identifier: search
-      name: Suche
-      url: /search/
-      weight: 10
-    - identifier: tags
-      name: Tags
-      url: /tags/
-      weight: 20
-
-outputs:
-  home:
-    - HTML
-    - RSS
-    - JSON 
+  footer:
+#    text: >
+#      [Impressum](/impress)
