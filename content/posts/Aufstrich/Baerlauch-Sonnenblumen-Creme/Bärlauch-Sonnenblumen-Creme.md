@@ -5,6 +5,11 @@ date: 2025-03-27T15:50:57+01:00
 tags: ["Vegan", "Frühling"]
 author: "Nils Bokermann"
 draft: false
+thumbnail: Bärlauch-Sonnenblumen-thumbnail.jpg
+images: ["Baerlauch-Sonnenblumen-1.jpg", "Baerlauch-Sonnenblumen-2.jpg"]
+prepTimeMinutes: 20
+cookTimeMinutes: 0
+servings: 16
 ---
 ## Zutaten
 - 200 g Sonnenblumenkerne

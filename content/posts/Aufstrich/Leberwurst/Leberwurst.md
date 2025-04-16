@@ -5,6 +5,7 @@ date: 2025-03-27T13:03:51+01:00
 tags: ["Vegan", "Frühling", "Sommer", "Herbst", "Winter"]
 author: "Nils Bokermann"
 draft: false
+images: ["Foo.jpg"]
 ---
 ## Zutaten
 - 120 g Kidneybohnen (getrocknet)
