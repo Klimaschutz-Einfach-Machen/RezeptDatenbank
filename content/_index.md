@@ -1,0 +1,3 @@
+---
+showLatest: true
+---
