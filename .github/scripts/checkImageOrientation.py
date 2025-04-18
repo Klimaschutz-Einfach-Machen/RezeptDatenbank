@@ -8,7 +8,7 @@ def is_near(a, b, tol=0.05):
 
 # Dateipfad aus Argument
 if len(sys.argv) <= 2:
-    print("Usage: checkPicOrientation.py <image_path>")
+    print("Usage: checkPicOrientation.py <image_path> <image_path>..." )
     sys.exit(0)
 
 paths = sys.argv[1:]
