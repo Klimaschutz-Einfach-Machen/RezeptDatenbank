@@ -40,6 +40,5 @@ jobs:
         env:
           ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
         run: |
-          cd $GITHUB_WORKSPACE 
-          ./.github/scripts/checkImageOrientation.sh $ALL_CHANGED_FILES >> "$GITHUB_ENV"
+          $GITHUB_WORKSPACE/.github/scripts/checkImageOrientation.sh $ALL_CHANGED_FILES >> "$GITHUB_ENV"
 
