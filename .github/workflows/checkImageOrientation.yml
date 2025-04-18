@@ -39,7 +39,12 @@ jobs:
         id: check-image-orientation
         env:
           ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
+        if: ${{ steps.changed-files.outputs.all_changed_files != '' }}
         run: |
           pip install Pillow
           $GITHUB_WORKSPACE/.github/scripts/checkImageOrientation.py $ALL_CHANGED_FILES >> "$GITHUB_ENV"
 
+      - name: Break if images were found
+        id: break-if-images-found
+        if: ${{ steps.check-image-orientation.outputs.wrong_sized_images != '' }}
+        run: exit 1
