@@ -42,9 +42,7 @@ jobs:
         if: ${{ steps.changed-files.outputs.all_changed_files != '' }}
         run: |
           pip install Pillow
-          echo "FILES: $ALL_CHANGED_FILES"
-          echo "FILES: ${{ steps.changed-files.outputs.all_changed_files }}"
-          $GITHUB_WORKSPACE/.github/scripts/checkImageOrientation.py $env.ALL_CHANGED_FILES
+          $GITHUB_WORKSPACE/.github/scripts/checkImageOrientation.py $ALL_CHANGED_FILES
 
       - name: Break if images were found
         id: break-if-images-found
