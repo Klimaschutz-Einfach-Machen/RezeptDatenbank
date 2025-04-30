@@ -1,0 +1,58 @@
+name: correct Image Orientation
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  crop_image:
+    runs-on: ubuntu-latest
+    if: github.event.issue.pull_request && contains(github.event.comment.body, '/images')
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Set up Python
+        run: |
+          pip install Pillow
+          pip install opencv-python
+          pip install opencv-python-contrib
+      - name: Gather changed files
+        id: changed-files
+        uses: tj-actions/changed-files@ed68ef82c095e0d48ec87eccea555d944a631a4c # v46
+        with:
+          # Avoid using single or double quotes for multiline patterns
+          files: |
+            **.jpg
+            **.jpeg
+            **.png
+            **.tif
+            **.tiff
+      - name: Find Images With Wrong Orientation
+        id: find-images
+        env:
+          ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
+        if: ${{ steps.changed-files.outputs.all_changed_files != '' }}
+        run: |
+          ALL_CHANGED_IMAGES=$(for image in `echo $ALL_CHANGED_FILES`; do
+            if [[ $image == *.jpg || $image == *.jpeg || $image == *.png || $image == *.tif || $image == *.tiff ]]; then
+              echo "$image"
+            fi
+          done)
+          $GITHUB_WORKSPACE/.github/scripts/checkImageOrientation.py $ALL_CHANGED_IMAGES >> $GITHUB_OUTPUT
+      - name: Correct Image Orientation
+        id: correct-image-orientation
+        if: ${{ steps.find-images.outputs.wrong_sized_images != '' }}
+        run: |
+          echo "The following images are not in the correct orientation:"
+          echo "${{ steps.find-images.outputs.wrong_sized_images }}"
+          $GITHUB_WORKSPACE/.github/scripts/imageCrop.py ${{ steps.find-images.outputs.wrong_sized_images }}
+      - name: Commit and Push Changes
+        if: ${{ steps.correct-image-orientation.outputs.wrong_sized_images != '' }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add ${{ steps.find-images.outputs.wrong_sized_images }}
+          git commit -m "[Bot]Correct image orientation"
+          git push
+          
