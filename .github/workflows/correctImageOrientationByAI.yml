@@ -8,6 +8,19 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.issue.pull_request && contains(github.event.comment.body, '/images')
     steps:
+      - name: Get PR info
+        id: pr_info
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number,
+            });
+            core.setOutput("sha", pr.data.head.sha);
+            core.setOutput("ref", pr.data.head.ref);
+            core.setOutput("repo", pr.data.head.repo.full_name);
       - name: Debug
         run: |
           echo "Event: ${{ toJson(github.event) }}"
@@ -15,7 +28,7 @@ jobs:
           echo "Event Type: ${{ github.event.action }}"
           echo "Comment Body: ${{ github.event.comment.body }}"
           echo "Pull Request URL: ${{ github.event.issue.pull_request.url }}"
-          echo "Pull Request Ref: ${{ github.event.pull_request.head.ref }}"
+          echo "Pull Request Ref: ${{ pr_info.ref }}"
       - name: Checkout
         uses: actions/checkout@v3
         with:
