@@ -6,12 +6,33 @@ on:
 jobs:
   cropimage:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: read
     if: github.event.issue.pull_request && contains(github.event.comment.body, '/images')
     steps:
+      - name: Get PR info
+        id: pr_info
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: "${{ github.event.issue.number}}" ,
+            });
+            const commits = await github.rest.pulls.listCommits({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: "${{ github.event.issue.number}}" ,
+            });
+            core.setOutput("ref", pr.data.head.ref);
+            core.setOutput("base_sha", commits.data[0].parents[0].sha);
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0
+          ref: ${{ steps.pr_info.outputs.ref }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
       - name: Set up Python
         run: |
           pip install Pillow
@@ -30,19 +51,14 @@ jobs:
             **.tiff
           files_ignore: |
             **thumbnail**
-          fetch_depth: 1
+          base_sha: "${{ steps.pr_info.outputs.base_sha }}"
       - name: Find Images With Wrong Orientation
         id: find-images
         env:
           ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
         if: ${{ steps.changed-files.outputs.all_changed_files != '' }}
         run: |
-          ALL_CHANGED_IMAGES=$(for image in `echo $ALL_CHANGED_FILES`; do
-            if [[ $image == *.jpg || $image == *.jpeg || $image == *.png || $image == *.tif || $image == *.tiff ]]; then
-              echo "$image"
-            fi
-          done)
-          $GITHUB_WORKSPACE/.github/scripts/checkImageOrientation.py $ALL_CHANGED_IMAGES >> $GITHUB_OUTPUT
+          $GITHUB_WORKSPACE/.github/scripts/checkImageOrientation.py $ALL_CHANGED_FILES >> $GITHUB_OUTPUT
       - name: Correct Image Orientation
         id: correct-image-orientation
         if: ${{ steps.find-images.outputs.wrong_sized_images != '' }}
@@ -51,7 +67,7 @@ jobs:
           echo "${{ steps.find-images.outputs.wrong_sized_images }}"
           $GITHUB_WORKSPACE/.github/scripts/imageCrop.py ${{ steps.find-images.outputs.wrong_sized_images }}
       - name: Commit and Push Changes
-        if: ${{ steps.correct-image-orientation.outputs.wrong_sized_images != '' }}
+        if: ${{ steps.find-images.outputs.wrong_sized_images != '' }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
