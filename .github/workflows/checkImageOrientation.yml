@@ -33,6 +33,8 @@ jobs:
             **.png
             **.tif
             **.tiff
+          files_ignore: |
+            **thumbnail**
 
       # Runs a single command using the runners shell
       - name: Check for image-Orientation

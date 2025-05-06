@@ -19,3 +19,22 @@ params:
   footer:
 #    text: >
 #      [Impressum](/impress)
+
+menus:
+  main:
+    - name: "Home"
+      url: "/"
+      weight: 1
+    - name: "Rezepte"
+      url: "/rezepte/"
+      weight: 2
+    - name: "Tags"
+      url: "/tags/"
+      weight: 3
+    - name: "Über uns"
+      url: "/about/"
+      weight: 4
+
+
+build:
+  writeStats: true
